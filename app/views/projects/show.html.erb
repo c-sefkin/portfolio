@@ -1,0 +1,24 @@
+<% content_for(:subtitle, "#{@project.name} Skills") %>
+
+<% if @project.skills.any? %>
+  <ul>
+    <% @project.skills.each do |skill| %>
+    <li>
+      Description: <%= skill.description %> |
+      <%= link_to "Edit", edit_project_skill_path(@project, skill) %> |
+      <%= link_to "Delete", project_skill_path(@project, skill),
+                                  :data => {:confirm => "Are you sure?",
+                                                    :method => "delete"} %>
+    </li>
+    <% end %>
+  </ul>
+  <% else %>
+    <p>There are no skills yet!</p>
+    <% end %>
+
+    <p><%= link_to "Add a skill", new_project_skill_path(@project) %></p>
+    <p><%= link_to "Delete project", project_path(@project),
+                                  :data => {:confirm => "Are you sure?",
+                                                :method => "delete"} %></p>
+
+    <p><%= link_to "Return to projects", projects_path %></p>
